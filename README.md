@@ -2,7 +2,7 @@
 
 **SkillSwap** is a developer-to-developer learning and mentorship platform that connects students and developers to **exchange skills**, share knowledge, and grow together.
 
-Built with ❤️ using:
+Built with using:
 - **Next.js** (App Router)
 - **React.js**
 - **MongoDB & Mongoose**
