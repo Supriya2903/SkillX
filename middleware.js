@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { verifyToken } from '@/utils/auth';
 
 // Protected routes that require authentication
-const protectedRoutes = ['/dashboard', '/profile', '/settings'];
+const protectedRoutes = ['/dashboard', '/profile', '/settings', '/add-skill'];
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
@@ -16,7 +16,6 @@ export async function middleware(request) {
     const token = request.cookies.get('token')?.value;
     
     if (!token) {
-      // Redirect to login if no token
       return NextResponse.redirect(new URL('/login', request.url));
     }
     
@@ -24,7 +23,6 @@ export async function middleware(request) {
     const decoded = verifyToken(token);
     
     if (!decoded) {
-      // Token is invalid, redirect to login
       return NextResponse.redirect(new URL('/login', request.url));
     }
     
@@ -38,11 +36,10 @@ export async function middleware(request) {
 
 export const config = {
   matcher: [
-    // Match all request paths except for the ones starting with:
-    // - api (API routes)
-    // - _next/static (static files)
-    // - _next/image (image optimization files)
-    // - favicon.ico (favicon file)
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    // Only match specific protected routes to avoid interference
+    '/dashboard/:path*',
+    '/profile/:path*', 
+    '/settings/:path*',
+    '/add-skill/:path*'
   ],
 };

@@ -42,8 +42,10 @@ export default function Login(){
                 setSuccess('Login successful!');
                 setFormData({email: '', password: ''});
                 
-                // Immediate redirect for better UX
-                router.push('/dashboard');
+                // Small delay to ensure cookie is set before redirect
+                setTimeout(() => {
+                    router.push('/dashboard');
+                }, 100);
             }else{
                 setError(data.message || 'Login failed');
                 setLoading(false);

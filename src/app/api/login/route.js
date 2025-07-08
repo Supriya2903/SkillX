@@ -23,7 +23,7 @@ export async function POST(req) {
     const token = generateToken(user);
 
     // ✅ Use Next.js 15 cookies() function - this is the recommended approach
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     cookieStore.set("token", token, {
       httpOnly: true,
       path: "/",
