@@ -3,7 +3,7 @@ import User from "@/models/Users";
 import bcrypt from "bcryptjs";
 import { generateToken } from "@/utils/auth";
 import { NextResponse } from "next/server";
-import { serialize } from "cookie"; 
+import { cookies } from "next/headers";
 
 export async function POST(req) {
   try {
@@ -22,17 +22,17 @@ export async function POST(req) {
 
     const token = generateToken(user);
 
-    // ✅ Serialize cookie with improved settings
-    const cookie = serialize("token", token, {
+    // ✅ Use Next.js 15 cookies() function - this is the recommended approach
+    const cookieStore = cookies();
+    cookieStore.set("token", token, {
       httpOnly: true,
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 days
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // More permissive in development
+      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
     });
-    
-    // ✅ Create response and set the Set-Cookie header manually
-    const response = NextResponse.json({ 
+
+    return NextResponse.json({ 
       message: "Login successful",
       user: {
         id: user._id,
@@ -40,15 +40,6 @@ export async function POST(req) {
         name: user.name
       }
     }, { status: 200 });
-    
-    response.headers.set("Set-Cookie", cookie);
-    
-    // Additional headers for better CORS handling in development
-    if (process.env.NODE_ENV === "development") {
-      response.headers.set("Access-Control-Allow-Credentials", "true");
-    }
-
-    return response;
 
   } catch (err) {
     console.error(err);
