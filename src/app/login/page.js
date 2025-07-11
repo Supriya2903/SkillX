@@ -15,8 +15,10 @@ export default function Login(){
         const token = getCookie('token');
         if (token) {
             // If token exists, redirect to dashboard
-            // (You can add token validation here if needed)
-            router.push('/dashboard');
+            // Adding a small delay to ensure proper navigation
+            setTimeout(() => {
+                router.push('/dashboard');
+            }, 100);
         }
     }, [router]);
 

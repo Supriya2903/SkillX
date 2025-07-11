@@ -25,7 +25,7 @@ export async function POST(req) {
     // ✅ Use Next.js 15 cookies() function - this is the recommended approach
     const cookieStore = await cookies();
     cookieStore.set("token", token, {
-      httpOnly: true,
+      httpOnly: false, // Allow client-side access for authentication checks
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 days
       secure: process.env.NODE_ENV === "production",
