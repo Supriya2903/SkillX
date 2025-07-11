@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCookie, deleteCookie } from '@/utils/cookies';
 import Navigation from '@/components/Navigation';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -106,53 +108,120 @@ export default function Dashboard() {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-gray-50 p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-xl p-8">
-            <div className="flex justify-between items-center mb-8">
-              <h1 className="text-3xl font-bold">Dashboard</h1>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Profile Summary */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 mb-8 border border-gray-200"
+          >
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
+                <span className="text-white font-bold text-2xl">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome back! 👋</h1>
+                <p className="text-gray-600">Manage your skills and track your progress</p>
+              </div>
             </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-purple-600">{skills.length}</div>
+                <div className="text-sm text-gray-600">Skills Added</div>
+              </div>
+              <div className="bg-gradient-to-r from-blue-100 to-cyan-100 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-blue-600">0</div>
+                <div className="text-sm text-gray-600">Connections</div>
+              </div>
+              <div className="bg-gradient-to-r from-green-100 to-teal-100 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-green-600">0</div>
+                <div className="text-sm text-gray-600">Exchanges</div>
+              </div>
+            </div>
+          </motion.div>
 
-            <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6">
-              <p className="font-semibold">✅ Welcome!</p>
-              <p className="text-sm">Your skills are listed below.</p>
+          {/* Skills Management */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200"
+          >
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800">Your Skills</h2>
+                <p className="text-gray-600">Add, manage, and showcase your abilities</p>
+              </div>
+              <Link
+                href="/add-skill"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+              >
+                + Add Skill
+              </Link>
             </div>
 
             {skills.length === 0 ? (
-              <div className="text-center text-gray-500">No skills added yet.</div>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12"
+              >
+                <div className="text-6xl mb-4">🎯</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">No skills added yet</h3>
+                <p className="text-gray-600 mb-6">Start by adding your first skill to begin your journey</p>
+                <Link
+                  href="/add-skill"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200"
+                >
+                  Add Your First Skill
+                </Link>
+              </motion.div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {skills.map((skill) => (
-                <div
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {skills.map((skill, index) => (
+                <motion.div
                   key={skill._id}
-                  className="bg-blue-50 p-6 rounded-lg shadow-md relative group hover:shadow-lg transition-shadow duration-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group relative border border-gray-200"
                 >
                   <button
                     onClick={() => handleDelete(skill._id)}
-                    className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold"
+                    className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold z-10"
                     title="Delete Skill"
                   >
                     ×
                   </button>
-                  <h3 className="text-xl font-semibold mb-2 pr-10">{skill.title}</h3>
-                  <p className="text-sm text-gray-700 mb-2">
-                    <strong>Level:</strong> {skill.level}
-                  </p>
-                  <p className="text-sm text-gray-700">
-                    <strong>Description:</strong>{' '}
-                    {skill.description ? skill.description : 'N/A'}
-                  </p>
-                </div>
+                  
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 pr-10">{skill.title}</h3>
+                    <div className="flex items-center space-x-2 mb-3">
+                      <span className="px-3 py-1 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-medium">
+                        {skill.level}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {skill.description || 'No description provided'}
+                    </p>
+                  </div>
+                  
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                    <span className="text-xs text-gray-500">Added recently</span>
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    </div>
+                  </div>
+                </motion.div>
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

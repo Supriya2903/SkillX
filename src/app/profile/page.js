@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCookie, deleteCookie } from '@/utils/cookies';
 import Navigation from '@/components/Navigation';
+import { motion } from 'framer-motion';
 
 export default function Profile() {
   const [loading, setLoading] = useState(true);
@@ -92,31 +93,71 @@ export default function Profile() {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-gray-50 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-6">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-xl p-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200"
+          >
             <div className="flex justify-between items-center mb-8">
-              <h1 className="text-3xl font-bold">Profile</h1>
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-800 mb-2">Profile Settings</h1>
+                <p className="text-gray-600">Manage your skills and preferences</p>
+              </div>
             </div>
 
             {error && (
-              <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
-                <p>{error}</p>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm"
+              >
+                {error}
+              </motion.div>
             )}
 
             <div className="space-y-8">
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Skills Offered</h2>
-                <div className="space-y-2">
+              {/* Profile Info */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-200"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
+                    <span className="text-white font-bold text-2xl">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800">{user?.name || 'User'}</h2>
+                    <p className="text-gray-600">{user?.email || 'email@example.com'}</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Skills Offered */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-teal-400 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">✓</span>
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800">Skills Offered</h2>
+                </div>
+                <div className="space-y-3">
                   {skillsOffered.map((skill, index) => (
-                    <div key={index} className="flex items-center gap-2">
+                    <motion.div 
+                      key={index} 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200"
+                    >
                       <input
                         type="text"
                         value={skill}
@@ -125,34 +166,50 @@ export default function Profile() {
                           newSkills[index] = e.target.value;
                           setSkillsOffered(newSkills);
                         }}
-                        placeholder="Enter skill"
-                        className="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter skill you can teach"
+                        className="flex-1 px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
                       />
                       <button
                         onClick={() => {
                           const newSkills = skillsOffered.filter((_, i) => i !== index);
                           setSkillsOffered(newSkills);
                         }}
-                        className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                        className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                       >
-                        Remove
+                        ×
                       </button>
-                    </div>
+                    </motion.div>
                   ))}
                   <button
                     onClick={() => setSkillsOffered([...skillsOffered, ''])}
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                    className="w-full py-3 border-2 border-dashed border-green-300 text-green-600 rounded-lg hover:bg-green-50 transition-colors font-medium"
                   >
-                    + Add Skill Offered
+                    + Add Skill You Can Teach
                   </button>
                 </div>
-              </div>
+              </motion.div>
 
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Skills Needed</h2>
-                <div className="space-y-2">
+              {/* Skills Needed */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-red-400 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">?</span>
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800">Skills Needed</h2>
+                </div>
+                <div className="space-y-3">
                   {skillsNeeded.map((skill, index) => (
-                    <div key={index} className="flex items-center gap-2">
+                    <motion.div 
+                      key={index} 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200"
+                    >
                       <input
                         type="text"
                         value={skill}
@@ -161,37 +218,41 @@ export default function Profile() {
                           newSkills[index] = e.target.value;
                           setSkillsNeeded(newSkills);
                         }}
-                        placeholder="Enter skill"
-                        className="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter skill you want to learn"
+                        className="flex-1 px-4 py-2 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
                       />
                       <button
                         onClick={() => {
                           const newSkills = skillsNeeded.filter((_, i) => i !== index);
                           setSkillsNeeded(newSkills);
                         }}
-                        className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                        className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                       >
-                        Remove
+                        ×
                       </button>
-                    </div>
+                    </motion.div>
                   ))}
                   <button
                     onClick={() => setSkillsNeeded([...skillsNeeded, ''])}
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                    className="w-full py-3 border-2 border-dashed border-orange-300 text-orange-600 rounded-lg hover:bg-orange-50 transition-colors font-medium"
                   >
-                    + Add Skill Needed
+                    + Add Skill You Want to Learn
                   </button>
                 </div>
-              </div>
+              </motion.div> {/* ✅ ← Missing closing tag now fixed */}
 
-              <button
+              {/* Save Button */}
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
                 onClick={handleSkillsUpdate}
-                className="w-full bg-green-500 text-white py-3 rounded hover:bg-green-600 transition text-lg font-semibold"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-200 transform hover:scale-105"
               >
-                Update Skills
-              </button>
+                Update Profile
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
