@@ -21,6 +21,8 @@ export async function POST(req) {
       name,
       email,
       password: hashedPassword,
+      skillsOffered: [],
+      skillsNeeded: [],
     });
 
     return new Response(JSON.stringify({ message: "User created", user: newUser }), {

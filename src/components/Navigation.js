@@ -63,6 +63,8 @@ export default function Navigation() {
         <div className="space-x-4">
           <Link href="/dashboard" className="hover:text-blue-200">Dashboard</Link>
           <Link href="/add-skill" className="hover:text-blue-200">Add Skill</Link>
+          <Link href="/profile" className="hover:text-blue-200">Profile</Link>
+          <Link href="/match" className="hover:text-blue-200">Find Matches</Link>
           <button 
             onClick={handleLogout}
             className="hover:text-blue-200 bg-transparent border-none cursor-pointer"
