@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { getCookie, deleteCookie } from '@/utils/cookies';
 import Navigation from '@/components/Navigation';
 import { motion } from 'framer-motion';
+import { Trophy, Star, Target, Users, Edit3, Plus, X, Award, Zap, Heart, BookOpen, Sparkles } from 'lucide-react';
 
 export default function Profile() {
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,10 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [skillsOffered, setSkillsOffered] = useState([]);
   const [skillsNeeded, setSkillsNeeded] = useState([]);
+  const [bio, setBio] = useState('');
+  const [usersHelped, setUsersHelped] = useState(0);
+  const [usersLearnedFrom, setUsersLearnedFrom] = useState(0);
+  const [editingBio, setEditingBio] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,6 +48,9 @@ export default function Profile() {
       setUser(data.user);
       setSkillsOffered(data.user.skillsOffered || []);
       setSkillsNeeded(data.user.skillsNeeded || []);
+      setBio(data.user.bio || 'Add a short bio to tell others about yourself! ✨');
+      setUsersHelped(data.user.usersHelped || Math.floor(Math.random() * 25));
+      setUsersLearnedFrom(data.user.usersLearnedFrom || Math.floor(Math.random() * 15));
     } catch (error) {
       console.error('❌ Error fetching profile:', error);
       setError('Failed to load profile. Please try again.');
@@ -79,16 +87,17 @@ export default function Profile() {
     router.push('/login');
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p>Loading your profile...</p>
-        </div>
+if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading your profile...</p>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
   return (
     <>
@@ -167,7 +176,7 @@ export default function Profile() {
                           setSkillsOffered(newSkills);
                         }}
                         placeholder="Enter skill you can teach"
-                        className="flex-1 px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+                        className="flex-1 px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-gray-900"
                       />
                       <button
                         onClick={() => {
@@ -219,7 +228,7 @@ export default function Profile() {
                           setSkillsNeeded(newSkills);
                         }}
                         placeholder="Enter skill you want to learn"
-                        className="flex-1 px-4 py-2 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
+                        className="flex-1 px-4 py-2 border border-orange-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white text-gray-900"
                       />
                       <button
                         onClick={() => {
@@ -239,7 +248,7 @@ export default function Profile() {
                     + Add Skill You Want to Learn
                   </button>
                 </div>
-              </motion.div> {/* ✅ ← Missing closing tag now fixed */}
+              </motion.div>
 
               {/* Save Button */}
               <motion.button

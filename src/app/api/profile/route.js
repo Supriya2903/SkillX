@@ -57,11 +57,17 @@ export async function PUT(req) {
       return NextResponse.json({ message: "Skills must be arrays" }, { status: 400 });
     }
 
+    // Normalize skills to lowercase for consistent matching
+    const normalizeSkills = (skills) => 
+      skills
+        .filter(skill => skill.trim() !== '')
+        .map(skill => skill.toLowerCase().trim());
+
     const updatedUser = await Users.findByIdAndUpdate(
       decoded.id,
       { 
-        skillsOffered: skillsOffered.filter(skill => skill.trim() !== ''),
-        skillsNeeded: skillsNeeded.filter(skill => skill.trim() !== '')
+        skillsOffered: normalizeSkills(skillsOffered),
+        skillsNeeded: normalizeSkills(skillsNeeded)
       },
       { new: true }
     ).select("-password");

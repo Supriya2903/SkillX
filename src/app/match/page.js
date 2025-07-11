@@ -145,14 +145,23 @@ export default function Match() {
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group"
                     >
-                      <div className="flex items-center mb-4">
-                        <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl w-12 h-12 flex items-center justify-center font-bold text-lg">
-                          {user.name.charAt(0).toUpperCase()}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center">
+                          <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl w-12 h-12 flex items-center justify-center font-bold text-lg">
+                            {user.name.charAt(0).toUpperCase()}
+                          </div>
+                          <div className="ml-3">
+                            <h3 className="text-lg font-semibold text-gray-900">{user.name}</h3>
+                            <p className="text-sm text-gray-600">{user.email}</p>
+                          </div>
                         </div>
-                        <div className="ml-3">
-                          <h3 className="text-lg font-semibold text-gray-900">{user.name}</h3>
-                          <p className="text-sm text-gray-600">{user.email}</p>
-                        </div>
+                        {user.matchScore && (
+                          <div className="bg-gradient-to-r from-green-100 to-blue-100 px-3 py-1 rounded-full">
+                            <span className="text-sm font-medium text-green-800">
+                              {Math.round(user.matchScore * 100)}% match
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="space-y-4">

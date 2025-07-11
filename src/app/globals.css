@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
+/* Gen-Z Inspired Color Palette */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Gen-Z Colors */
+  --lavender: #E6E6FA;
+  --lavender-dark: #B8B8DC;
+  --mint: #98FB98;
+  --mint-dark: #66D266;
+  --neon-pink: #FF69B4;
+  --neon-pink-dark: #FF1493;
+  --cyan: #00FFFF;
+  --cyan-dark: #00E5E5;
+  --peach: #FFCBA4;
+  --peach-dark: #FFB366;
+  --violet: #8A2BE2;
+  --violet-dark: #6A1B9A;
 }
 
 @theme inline {
@@ -10,6 +25,34 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Gen-Z color system */
+  --color-lavender: var(--lavender);
+  --color-lavender-dark: var(--lavender-dark);
+  --color-mint: var(--mint);
+  --color-mint-dark: var(--mint-dark);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-pink-dark: var(--neon-pink-dark);
+  --color-cyan: var(--cyan);
+  --color-cyan-dark: var(--cyan-dark);
+  --color-peach: var(--peach);
+  --color-peach-dark: var(--peach-dark);
+  --color-violet: var(--violet);
+  --color-violet-dark: var(--violet-dark);
+}
+
+/* Dark mode variables */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  
+  /* Darker versions for dark mode */
+  --lavender: #4A4A6B;
+  --mint: #2D5A2D;
+  --neon-pink: #CC1493;
+  --cyan: #008B8B;
+  --peach: #CC8A4A;
+  --violet: #5A1B7A;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +65,41 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--neon-pink), var(--violet));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--neon-pink-dark), var(--violet-dark));
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
