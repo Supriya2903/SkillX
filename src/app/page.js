@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDown, Users, BookOpen, Trophy, Star, ChevronRight } from 'lucide-react';
 
@@ -67,10 +68,16 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center space-x-2"
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">S</span>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-600 to-violet-600 bg-clip-text text-transparent">SkillSwap</span>
+              <Image 
+                src="/logo.png" 
+                alt="SkillX Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-md"
+                priority
+              />
+      
+              <span className="text-xl font-bold bg-gradient-to-r from-pink-600 to-violet-600 bg-clip-text text-transparent">SkillX</span>
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
@@ -219,7 +226,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-pink-100 mb-8 max-w-2xl mx-auto"
           >
-            Join thousands of learners and teachers already on SkillSwap ✨
+            Join thousands of learners and teachers already on SkillX ✨
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -234,12 +241,12 @@ export default function Home() {
               Get Started
               <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
+            {/* <Link 
               href="/login" 
               className="inline-flex items-center px-8 py-3 border-2 border-white text-white rounded-full text-lg font-medium hover:bg-white hover:text-pink-600 transition-all duration-200 transform hover:scale-105"
             >
               Sign In
-            </Link>
+            </Link> */}
           </motion.div>
         </div>
       </section>
@@ -249,10 +256,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">S</span>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">SkillSwap</span>
+               <Image 
+                src="/logo.png" 
+                alt="SkillX Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-md"
+                priority
+              />
+              
+              <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">SkillX</span>
             </div>
             <div className="flex space-x-8 text-gray-400">
               <Link href="#" className="hover:text-pink-400 transition-colors">About</Link>
@@ -262,7 +275,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-            <p className="text-gray-400">&copy; 2025 SkillSwap. All rights reserved.</p>
+            <p className="text-gray-400">&copy; 2025 SkillX. All rights reserved.</p>
           </div>
         </div>
       </footer>

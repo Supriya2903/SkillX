@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import {useRouter} from 'next/navigation';
 import {getCookie} from '@/utils/cookies';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Login(){
@@ -75,10 +76,15 @@ export default function Login(){
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-flex items-center space-x-2"
           >
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">S</span>
-            </div>
-            <span className="text-2xl font-bold text-gray-800">SkillSwap</span>
+            {/* ✅ Logo image instead of just S box */}
+            <Image
+               src="/logo.png"
+               alt="SkillX Logo"
+               width={48}
+               height={48}
+               className="rounded-xl"
+             />
+            <span className="text-2xl font-bold text-gray-800">SkillX</span>
           </motion.div>
         </div>
 
