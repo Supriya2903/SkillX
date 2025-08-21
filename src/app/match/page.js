@@ -171,12 +171,12 @@ export default function Match() {
                             <h4 className="text-sm font-medium text-gray-700">Skills Offered:</h4>
                           </div>
                           <div className="flex flex-wrap gap-1">
-                            {user.skillsOffered.map((skill, index) => (
+                            {(user.skillsOffered || []).map((skill, index) => (
                               <span
                                 key={index}
                                 className="px-3 py-1 bg-gradient-to-r from-green-100 to-teal-100 text-green-800 text-xs rounded-full font-medium"
                               >
-                                {skill}
+                                {typeof skill === 'string' ? skill : skill?.name || 'Unknown Skill'}
                               </span>
                             ))}
                           </div>
@@ -188,12 +188,12 @@ export default function Match() {
                             <h4 className="text-sm font-medium text-gray-700">Skills Needed:</h4>
                           </div>
                           <div className="flex flex-wrap gap-1">
-                            {user.skillsNeeded.map((skill, index) => (
+                            {(user.skillsNeeded || []).map((skill, index) => (
                               <span
                                 key={index}
                                 className="px-3 py-1 bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 text-xs rounded-full font-medium"
                               >
-                                {skill}
+                                {typeof skill === 'string' ? skill : skill?.name || 'Unknown Skill'}
                               </span>
                             ))}
                           </div>
@@ -201,7 +201,7 @@ export default function Match() {
                       </div>
 
                       <div className="mt-6 pt-4 border-t border-gray-200">
-                        <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 group-hover:scale-105 flex items-center justify-center">
+                        <button onClick={() => router.push(`/messages?user=${user._id}`)} className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 group-hover:scale-105 flex items-center justify-center">
                           <MessageCircle className="mr-2 h-4 w-4" />
                           Connect
                         </button>

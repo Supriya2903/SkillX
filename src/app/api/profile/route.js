@@ -57,17 +57,51 @@ export async function PUT(req) {
       return NextResponse.json({ message: "Skills must be arrays" }, { status: 400 });
     }
 
-    // Normalize skills to lowercase for consistent matching
-    const normalizeSkills = (skills) => 
-      skills
-        .filter(skill => skill.trim() !== '')
-        .map(skill => skill.toLowerCase().trim());
+    // Process skills - handle both string arrays (legacy) and object arrays (new format)
+    const processSkills = (skills) => {
+      return skills
+        .filter(skill => {
+          // Filter out empty skills
+          if (typeof skill === 'string') {
+            return skill.trim() !== '';
+          } else if (typeof skill === 'object' && skill.name) {
+            return skill.name.trim() !== '';
+          }
+          return false;
+        })
+        .map(skill => {
+          // Convert string skills to object format
+          if (typeof skill === 'string') {
+            return {
+              name: skill.toLowerCase().trim(),
+              level: 'Beginner',
+              category: 'Other',
+              verified: false,
+              description: ''
+            };
+          } else {
+            // Handle object format
+            return {
+              name: skill.name.toLowerCase().trim(),
+              level: skill.level || 'Beginner',
+              category: skill.category || 'Other',
+              verified: skill.verified || false,
+              yearsOfExperience: skill.yearsOfExperience || 0,
+              priority: skill.priority || 'Medium',
+              description: skill.description || ''
+            };
+          }
+        });
+    };
+
+    const processedSkillsOffered = processSkills(skillsOffered);
+    const processedSkillsNeeded = processSkills(skillsNeeded);
 
     const updatedUser = await Users.findByIdAndUpdate(
       decoded.id,
       { 
-        skillsOffered: normalizeSkills(skillsOffered),
-        skillsNeeded: normalizeSkills(skillsNeeded)
+        skillsOffered: processedSkillsOffered,
+        skillsNeeded: processedSkillsNeeded
       },
       { new: true }
     ).select("-password");
@@ -83,6 +117,6 @@ export async function PUT(req) {
 
   } catch (err) {
     console.error("❌ Profile UPDATE Error:", err);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
+    return NextResponse.json({ message: "Server error", error: err.message }, { status: 500 });
   }
 }

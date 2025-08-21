@@ -46,8 +46,17 @@ export default function Profile() {
 
       const data = await res.json();
       setUser(data.user);
-      setSkillsOffered(data.user.skillsOffered || []);
-      setSkillsNeeded(data.user.skillsNeeded || []);
+      
+      // Extract skill names from objects or handle string arrays (backward compatibility)
+      const extractSkillNames = (skills) => {
+        if (!skills || !Array.isArray(skills)) return [];
+        return skills.map(skill => 
+          typeof skill === 'string' ? skill : skill.name || skill
+        );
+      };
+      
+      setSkillsOffered(extractSkillNames(data.user.skillsOffered));
+      setSkillsNeeded(extractSkillNames(data.user.skillsNeeded));
       setBio(data.user.bio || 'Add a short bio to tell others about yourself! ✨');
       setUsersHelped(data.user.usersHelped || Math.floor(Math.random() * 25));
       setUsersLearnedFrom(data.user.usersLearnedFrom || Math.floor(Math.random() * 15));

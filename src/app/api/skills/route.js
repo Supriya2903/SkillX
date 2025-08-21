@@ -23,18 +23,22 @@ export async function POST(req) {
             return NextResponse.json({ message: "Invalid token" }, { status: 401 });
         }
 
-        const body = await req.json();
-        console.log("Request body:", body);
+        const { title, description, level, category, skillType } = await req.json();
+        console.log("Request body:", { title, description, level, category, skillType });
 
         // Validate required fields
-        if (!body.title || !body.level) {
-            return NextResponse.json({ message: "Title and level are required" }, { status: 400 });
+        if (!title || !level || !category || !skillType) {
+            return NextResponse.json({ 
+                message: "Title, level, category, and skillType are required" 
+            }, { status: 400 });
         }
 
         const skillData = {
-            title: body.title,
-            description: body.description || "",
-            level: body.level,
+            title,
+            description: description || "",
+            level,
+            category,
+            skillType,
             createdBy: decoded.id,
         };
 
