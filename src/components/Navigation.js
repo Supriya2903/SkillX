@@ -113,12 +113,23 @@ export default function Navigation() {
       ? "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors text-base font-medium"
       : "flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors font-medium";
     
-    const activeClasses = active
-      ? "bg-purple-100 text-purple-600"
-      : "text-gray-600 hover:text-purple-600 hover:bg-gray-50";
+    const activeStyle = active
+      ? { backgroundColor: '#F0E9E2', color: '#865D36' }
+      : { color: '#5A4E44' };
+
+    const hoverProps = !active ? {
+      onMouseEnter: (e) => {
+        e.target.style.color = '#865D36';
+        e.target.style.backgroundColor = '#F6F2ED';
+      },
+      onMouseLeave: (e) => {
+        e.target.style.color = '#5A4E44';
+        e.target.style.backgroundColor = 'transparent';
+      }
+    } : {};
 
     return (
-      <Link href={href} className={`${baseClasses} ${activeClasses}`}>
+      <Link href={href} className={baseClasses} style={activeStyle} {...hoverProps}>
         {Icon && <Icon className="h-4 w-4" />}
         <span>{children}</span>
       </Link>
@@ -126,7 +137,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <nav className="backdrop-blur-md border-b sticky top-0 z-50 shadow-sm" style={{backgroundColor: 'rgba(252, 250, 247, 0.9)', borderColor: '#D5C7BC'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -144,7 +155,7 @@ export default function Navigation() {
                 className="rounded-md"
                 priority
               />
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
                 SkillX
               </span>
             </Link>
@@ -162,7 +173,11 @@ export default function Navigation() {
             ) : (
               <>
                 <NavLink href="/">Home</NavLink>
-                <Link href="/login" className="text-gray-600 hover:text-purple-600 transition-colors font-medium px-3 py-2">
+                <Link href="/login" className="text-gray-600 transition-colors font-medium px-3 py-2"
+                  style={{color: '#5A4E44'}}
+                  onMouseEnter={(e) => e.target.style.color = '#865D36'}
+                  onMouseLeave={(e) => e.target.style.color = '#5A4E44'}
+                >
                   Login
                 </Link>
               </>
@@ -227,7 +242,7 @@ export default function Navigation() {
                               >
                                 <div className="flex items-start space-x-3">
                                   <div className="flex-shrink-0">
-                                    <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white text-sm">
+                                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}>
                                       {notification.type === 'skill_match' ? '🎯' : 
                                        notification.type === 'new_message' ? '💬' :
                                        notification.type === 'badge_earned' ? '🏆' : '🔔'}
@@ -260,7 +275,10 @@ export default function Navigation() {
                         <div className="px-4 py-2 border-t border-gray-100">
                           <Link
                             href="/notifications"
-                            className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                            className="text-sm font-medium"
+                            style={{color: '#865D36'}}
+                            onMouseEnter={(e) => e.target.style.color = '#B8956A'}
+                            onMouseLeave={(e) => e.target.style.color = '#865D36'}
                             onClick={() => setShowNotifications(false)}
                           >
                             View all notifications
@@ -277,7 +295,7 @@ export default function Navigation() {
                     onClick={() => setShowProfile(!showProfile)}
                     className="flex items-center space-x-2 p-1 rounded-full hover:bg-gray-100 transition-colors"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white font-medium text-sm">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-sm" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}>
                       {user?.avatar ? (
                         <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
                       ) : (
@@ -348,7 +366,8 @@ export default function Navigation() {
             ) : (
               <Link
                 href="/signup"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 font-medium transform hover:scale-105"
+                className="text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 font-medium transform hover:scale-105"
+                style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}
               >
                 Sign Up
               </Link>
@@ -398,7 +417,8 @@ export default function Navigation() {
                   <div className="px-4 py-2">
                     <Link
                       href="/signup"
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 font-medium w-full block text-center"
+                      className="text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 font-medium w-full block text-center"
+                      style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}
                     >
                       Sign Up
                     </Link>

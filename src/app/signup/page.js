@@ -52,7 +52,7 @@ export default function Signup(){
     }
 
     return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{background: 'linear-gradient(135deg, #FCFAF7 0%, #F6F2ED 50%, #F0E9E2 100%)'}}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function Signup(){
                height={48}
             className="rounded-xl"
             />
-            <span className="text-2xl font-bold text-gray-800">SkillX</span>
+            <span className="text-2xl font-bold" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>SkillX</span>
           </motion.div>
         </div>
 
@@ -87,8 +87,8 @@ export default function Signup(){
           onSubmit={handleSubmit}
           className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-200"
         >
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create Account</h2>
-          <p className="text-gray-600 text-center mb-8">Join the skill exchange community</p>
+          <h2 className="text-2xl font-bold mb-6 text-center" style={{color: '#3E362E'}}>Create Account</h2>
+          <p className="text-center mb-8" style={{color: '#5A4E44'}}>Join the skill exchange community</p>
 
           {error && (
             <motion.div
@@ -118,7 +118,8 @@ export default function Signup(){
                 placeholder="Enter your full name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                style={{'--tw-ring-color': '#865D36'}}
                 required
               />
             </div>
@@ -131,7 +132,8 @@ export default function Signup(){
                 placeholder="Enter your email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                style={{'--tw-ring-color': '#865D36'}}
                 required
               />
             </div>
@@ -144,7 +146,8 @@ export default function Signup(){
                 placeholder="Create a secure password"
                 value={form.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                style={{'--tw-ring-color': '#865D36'}}
                 required
               />
             </div>
@@ -153,7 +156,8 @@ export default function Signup(){
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
+            className="w-full mt-6 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
+            style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}
           >
             {loading ? (
               <div className="flex items-center justify-center space-x-2">
@@ -166,9 +170,9 @@ export default function Signup(){
           </button>
 
           <div className="mt-6 text-center">
-            <p className="text-gray-600 text-sm">
+            <p className="text-sm" style={{color: '#5A4E44'}}>
               Already have an account?{' '}
-              <Link href="/login" className="text-purple-600 hover:text-purple-700 font-medium">
+              <Link href="/login" className="font-medium transition-colors" style={{color: '#865D36'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#865D36'}>
                 Sign in here
               </Link>
             </p>
@@ -179,7 +183,10 @@ export default function Signup(){
         <div className="text-center mt-6">
           <Link 
             href="/" 
-            className="text-gray-600 hover:text-purple-600 transition-colors text-sm font-medium"
+            className="transition-colors text-sm font-medium"
+            style={{color: '#5A4E44'}}
+            onMouseEnter={(e) => e.target.style.color = '#865D36'}
+            onMouseLeave={(e) => e.target.style.color = '#5A4E44'}
           >
             ← Back to Home
           </Link>

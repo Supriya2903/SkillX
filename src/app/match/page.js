@@ -55,9 +55,9 @@ export default function Match() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #F6F2ED 0%, #FCFAF7 50%, #F0E9E2 100%)'}}>
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{borderColor: '#865D36', borderTopColor: 'transparent'}}></div>
           <p className="text-gray-600">Finding your skill matches...</p>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function Match() {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-6">
+      <div className="min-h-screen p-6" style={{background: 'linear-gradient(135deg, #F6F2ED 0%, #FCFAF7 50%, #F0E9E2 100%)'}}>
         <div className="max-w-6xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -77,12 +77,13 @@ export default function Match() {
           >
             <div className="flex justify-between items-center mb-8">
               <div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">Skill Matches ⚡</h1>
+                <h1 className="text-3xl font-bold mb-2" style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Skill Matches ⚡</h1>
                 <p className="text-gray-600">Connect with people who have complementary skills</p>
               </div>
               <button
                 onClick={handleUpdateSkills}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                className="text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)'}}
               >
                 Update Skills
               </button>
@@ -114,7 +115,8 @@ export default function Match() {
                 </p>
                 <button
                   onClick={handleUpdateSkills}
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200"
+                  className="inline-flex items-center px-6 py-3 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-200"
+                  style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)'}}
                 >
                   <Users className="mr-2 h-5 w-5" />
                   Update Profile
@@ -125,13 +127,14 @@ export default function Match() {
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-200 rounded-lg p-4 mb-6"
+                  className="rounded-lg p-4 mb-6"
+                  style={{background: 'linear-gradient(135deg, #F0E9E2 0%, #F6F2ED 100%)', borderColor: '#D5C7BC', border: '1px solid'}}
                 >
                   <div className="flex items-center">
-                    <Zap className="h-5 w-5 text-purple-600 mr-2" />
-                    <p className="font-semibold text-purple-800">Great news!</p>
+                    <Zap className="h-5 w-5 mr-2" style={{color: '#865D36'}} />
+                    <p className="font-semibold" style={{color: '#865D36'}}>Great news!</p>
                   </div>
-                  <p className="text-sm text-purple-700 mt-1">
+                  <p className="text-sm mt-1" style={{color: '#5A4E44'}}>
                     We found {matchedUsers.length} user{matchedUsers.length !== 1 ? 's' : ''} with complementary skills.
                   </p>
                 </motion.div>
@@ -147,7 +150,7 @@ export default function Match() {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
-                          <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl w-12 h-12 flex items-center justify-center font-bold text-lg">
+                          <div className="text-white rounded-2xl w-12 h-12 flex items-center justify-center font-bold text-lg" style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)'}}>
                             {user.name.charAt(0).toUpperCase()}
                           </div>
                           <div className="ml-3">
@@ -201,7 +204,7 @@ export default function Match() {
                       </div>
 
                       <div className="mt-6 pt-4 border-t border-gray-200">
-                        <button onClick={() => router.push(`/messages?user=${user._id}`)} className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 group-hover:scale-105 flex items-center justify-center">
+                        <button onClick={() => router.push(`/messages?user=${user._id}`)} className="w-full text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 group-hover:scale-105 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)'}}>
                           <MessageCircle className="mr-2 h-4 w-4" />
                           Connect
                         </button>

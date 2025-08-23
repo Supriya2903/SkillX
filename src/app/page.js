@@ -9,25 +9,25 @@ const features = [
     title: 'Dashboard',
     desc: 'Manage your skills and track your progress',
     icon: BookOpen,
-    color: 'from-pink-400 to-rose-400'
+    color: '#865D36'
   },
   {
     title: 'Matching System',
     desc: 'Connect with people who have complementary skills',
     icon: Users,
-    color: 'from-purple-400 to-indigo-400'
+    color: '#B8956A'
   },
   {
     title: 'Your Journey',
     desc: 'Track your learning and teaching milestones',
     icon: Star,
-    color: 'from-blue-400 to-cyan-400'
+    color: '#AC8968'
   },
   {
     title: 'Badges',
     desc: 'Earn recognition for your skills and achievements',
     icon: Trophy,
-    color: 'from-yellow-400 to-orange-400'
+    color: '#A69080'
   },
 ];
 
@@ -36,19 +36,19 @@ const steps = [
     title: 'Add Skills',
     desc: 'Share what you know and what you want to learn',
     emoji: '🔥',
-    color: 'bg-gradient-to-r from-pink-100 to-rose-100'
+    color: 'bg-gradient-to-r from-orange-100 to-amber-100'
   },
   {
     title: 'Match',
     desc: 'Find people with complementary skills',
     emoji: '⚡',
-    color: 'bg-gradient-to-r from-purple-100 to-indigo-100'
+    color: 'bg-gradient-to-r from-yellow-100 to-orange-100'
   },
   {
     title: 'Learn',
     desc: 'Start your skill exchange journey',
     emoji: '✨',
-    color: 'bg-gradient-to-r from-blue-100 to-cyan-100'
+    color: 'bg-gradient-to-r from-green-100 to-teal-100'
   },
 ];
 
@@ -58,7 +58,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-100 via-pink-50 to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-orange-50" style={{background: 'linear-gradient(135deg, #FCFAF7 0%, #F6F2ED 50%, #F0E9E2 100%)'}}>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 dark:border-gray-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,7 +77,7 @@ export default function Home() {
                 priority
               />
       
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-600 to-violet-600 bg-clip-text text-transparent">SkillX</span>
+              <span className="text-xl font-bold" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>SkillX</span>
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
@@ -87,13 +87,17 @@ export default function Home() {
 
               <Link 
                 href="/login" 
-                className="text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors font-medium"
+                className="transition-colors font-medium"
+                style={{color: '#5A4E44'}}
+                onMouseEnter={(e) => e.target.style.color = '#865D36'}
+                onMouseLeave={(e) => e.target.style.color = '#5A4E44'}
               >
                 Login
               </Link>
               <Link 
                 href="/signup" 
-                className="bg-gradient-to-r from-pink-500 to-violet-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-200 font-medium transform hover:scale-105"
+                className="text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-200 font-medium transform hover:scale-105"
+                style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}
               >
                 Sign Up
               </Link>
@@ -109,11 +113,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 dark:text-gray-100 mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+            style={{color: '#3E362E'}}
           >
             Swap Skills.
             <br />
-            <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+            <span style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
               Learn Together.
             </span>
           </motion.h1>
@@ -121,7 +126,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
+            style={{color: '#5A4E44'}}
           >
             A collaborative platform to teach what you know and learn what you need. ✨
           </motion.p>
@@ -130,7 +136,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             onClick={() => scrollToSection('how-it-works')}
-            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-pink-500 to-violet-500 text-white rounded-full text-lg font-medium hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-200 group transform hover:scale-105"
+            className="inline-flex items-center px-8 py-3 text-white rounded-full text-lg font-medium hover:shadow-lg transition-all duration-200 group transform hover:scale-105"
+            style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', boxShadow: '0 10px 25px rgba(134, 93, 54, 0.25)'}}
           >
             See How It Works
             <ArrowDown className="ml-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
@@ -197,7 +204,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group border border-white/20 dark:border-gray-700/50 transform hover:scale-105"
                 >
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`} style={{backgroundColor: feature.color}}>
                     <Icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{feature.title}</h3>
@@ -210,7 +217,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500 to-violet-500">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}>
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
@@ -224,7 +231,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-pink-100 mb-8 max-w-2xl mx-auto"
+            className="text-xl mb-8 max-w-2xl mx-auto" 
+            style={{color: 'rgba(255, 255, 255, 0.9)'}}
           >
             Join thousands of learners and teachers already on SkillX ✨
           </motion.p>
@@ -236,17 +244,12 @@ export default function Home() {
           >
             <Link 
               href="/signup" 
-              className="inline-flex items-center px-8 py-3 bg-white text-pink-600 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-200 group transform hover:scale-105"
+              className="inline-flex items-center px-8 py-3 bg-white rounded-full text-lg font-medium hover:shadow-lg transition-all duration-200 group transform hover:scale-105"
+              style={{color: '#865D36'}}
             >
               Get Started
               <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            {/* <Link 
-              href="/login" 
-              className="inline-flex items-center px-8 py-3 border-2 border-white text-white rounded-full text-lg font-medium hover:bg-white hover:text-pink-600 transition-all duration-200 transform hover:scale-105"
-            >
-              Sign In
-            </Link> */}
           </motion.div>
         </div>
       </section>
@@ -265,13 +268,13 @@ export default function Home() {
                 priority
               />
               
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">SkillX</span>
+              <span className="text-xl font-bold" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>SkillX</span>
             </div>
             <div className="flex space-x-8 text-gray-400">
-              <Link href="#" className="hover:text-pink-400 transition-colors">About</Link>
-              <Link href="#" className="hover:text-pink-400 transition-colors">Contact</Link>
-              <Link href="#" className="hover:text-pink-400 transition-colors">Terms</Link>
-              <Link href="#" className="hover:text-pink-400 transition-colors">Privacy</Link>
+              <Link href="#" className="transition-colors" style={{'&:hover': {color: '#B8956A'}}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>About</Link>
+              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Contact</Link>
+              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Terms</Link>
+              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Privacy</Link>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-700 text-center">

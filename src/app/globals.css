@@ -1,23 +1,22 @@
 @import "tailwindcss";
 
-/* Gen-Z Inspired Color Palette */
+/* Kozowood-inspired Color Palette */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #3E362E;
   
-  /* Gen-Z Colors */
-  --lavender: #E6E6FA;
-  --lavender-dark: #B8B8DC;
-  --mint: #98FB98;
-  --mint-dark: #66D266;
-  --neon-pink: #FF69B4;
-  --neon-pink-dark: #FF1493;
-  --cyan: #00FFFF;
-  --cyan-dark: #00E5E5;
-  --peach: #FFCBA4;
-  --peach-dark: #FFB366;
-  --violet: #8A2BE2;
-  --violet-dark: #6A1B9A;
+  /* Kozowood Colors */
+  --kozowood-dark: #3E362E;
+  --kozowood-medium: #865D36;
+  --kozowood-accent: #9378B5;
+  --kozowood-tan: #AC8968;
+  --kozowood-light: #A69080;
+  --kozowood-beige: #F0E9E2;
+  --kozowood-cream: #F6F2ED;
+  --kozowood-white: #FCFAF7;
+  --kozowood-text: #3E362E;
+  --kozowood-text-light: #5A4E44;
+  --kozowood-border: #D5C7BC;
 }
 
 @theme inline {
@@ -26,33 +25,34 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   
-  /* Gen-Z color system */
-  --color-lavender: var(--lavender);
-  --color-lavender-dark: var(--lavender-dark);
-  --color-mint: var(--mint);
-  --color-mint-dark: var(--mint-dark);
-  --color-neon-pink: var(--neon-pink);
-  --color-neon-pink-dark: var(--neon-pink-dark);
-  --color-cyan: var(--cyan);
-  --color-cyan-dark: var(--cyan-dark);
-  --color-peach: var(--peach);
-  --color-peach-dark: var(--peach-dark);
-  --color-violet: var(--violet);
-  --color-violet-dark: var(--violet-dark);
+  /* Kozowood color system */
+  --color-kozowood-dark: var(--kozowood-dark);
+  --color-kozowood-medium: var(--kozowood-medium);
+  --color-kozowood-accent: var(--kozowood-accent);
+  --color-kozowood-tan: var(--kozowood-tan);
+  --color-kozowood-light: var(--kozowood-light);
+  --color-kozowood-beige: var(--kozowood-beige);
+  --color-kozowood-cream: var(--kozowood-cream);
+  --color-kozowood-white: var(--kozowood-white);
+  --color-kozowood-text: var(--kozowood-text);
+  --color-kozowood-text-light: var(--kozowood-text-light);
+  --color-kozowood-border: var(--kozowood-border);
 }
 
 /* Dark mode variables */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #2B241E;
+  --foreground: #F6F2ED;
   
-  /* Darker versions for dark mode */
-  --lavender: #4A4A6B;
-  --mint: #2D5A2D;
-  --neon-pink: #CC1493;
-  --cyan: #008B8B;
-  --peach: #CC8A4A;
-  --violet: #5A1B7A;
+  /* Darker Kozowood versions for dark mode */
+  --kozowood-dark: #2B241E;
+  --kozowood-medium: #6B4A29;
+  --kozowood-accent: #7A649A;
+  --kozowood-tan: #8A6B52;
+  --kozowood-light: #8B7866;
+  --kozowood-beige: #3E362E;
+  --kozowood-cream: #4A4037;
+  --kozowood-white: #524740;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,12 +91,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--neon-pink), var(--violet));
+  background: linear-gradient(to bottom, var(--kozowood-medium), var(--kozowood-accent));
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--neon-pink-dark), var(--violet-dark));
+  background: linear-gradient(to bottom, var(--kozowood-dark), var(--kozowood-tan));
 }
 
 /* Smooth transitions for theme changes */
