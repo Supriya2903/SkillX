@@ -74,21 +74,25 @@ export default function Profile() {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ skillsOffered, skillsNeeded })
+        body: JSON.stringify({ skillsOffered, skillsNeeded, bio })
       });
 
       if (!res.ok) {
-        throw new Error('Failed to update profile skills');
+        throw new Error('Failed to update profile');
       }
 
       const data = await res.json();
       setUser(data.user);
       setError('');
-      alert('Skills updated successfully!');
+      alert('Profile updated successfully!');
     } catch (error) {
-      console.error('❌ Error updating skills:', error);
-      setError('Failed to update skills. Please try again.');
+      console.error('❌ Error updating profile:', error);
+      setError('Failed to update profile. Please try again.');
     }
+  };
+
+  const handleBioSave = () => {
+    setEditingBio(false);
   };
 
   const handleLogout = () => {
@@ -157,6 +161,72 @@ if (loading) {
                 </div>
               </motion.div>
 
+              {/* Bio Section */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}>
+                      <span className="text-white font-bold text-sm">✏️</span>
+                    </div>
+                    <h2 className="text-xl font-semibold text-gray-800">Bio</h2>
+                  </div>
+                  <button
+                    onClick={() => setEditingBio(!editingBio)}
+                    className="flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors" 
+                    style={{color: '#865D36', border: '1px solid rgba(134, 93, 54, 0.3)'}}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = 'rgba(134, 93, 54, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    <Edit3 className="h-4 w-4 mr-1" />
+                    {editingBio ? 'Cancel' : 'Edit'}
+                  </button>
+                </div>
+                
+                <div className="p-4 rounded-lg" style={{background: 'linear-gradient(135deg, #F6F2ED 0%, #FCFAF7 100%)', border: '1px solid rgba(134, 93, 54, 0.2)'}}>
+                  {editingBio ? (
+                    <div className="space-y-3">
+                      <textarea
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        placeholder="Tell others about yourself, your interests, learning goals, and what makes you unique..."
+                        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 bg-white text-gray-900 resize-none" 
+                        style={{border: '1px solid rgba(134, 93, 54, 0.3)', '--tw-ring-color': '#865D36'}}
+                        rows={6}
+                      />
+                      <div className="flex justify-end space-x-2">
+                        <button
+                          onClick={() => setEditingBio(false)}
+                          className="px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={handleBioSave}
+                          className="px-4 py-2 text-white rounded-lg hover:shadow-lg transition-all duration-200" 
+                          style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)'}}
+                        >
+                          Save Bio
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="min-h-[120px] flex items-start">
+                      <p className="text-gray-700 leading-relaxed">
+                        {bio || 'Click "Edit" to add a bio and tell others about yourself! ✨'}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+
               {/* Skills Offered */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -196,7 +266,10 @@ if (loading) {
                           const newSkills = skillsOffered.filter((_, i) => i !== index);
                           setSkillsOffered(newSkills);
                         }}
-                        className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        className="px-3 py-2 text-white rounded-lg transition-colors"
+                        style={{backgroundColor: 'rgba(239, 68, 68, 0.6)'}}
+                        onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(239, 68, 68, 0.8)'}
+                        onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(239, 68, 68, 0.6)'}
                       >
                         ×
                       </button>
@@ -221,7 +294,7 @@ if (loading) {
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
                 <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(135deg, #6B5B95 0%, #A7A2CC 100%)'}}>
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background: 'linear-gradient(135deg, #AC8968 0%, #A69080 100%)'}}>
                     <span className="text-white font-bold text-sm">?</span>
                   </div>
                   <h2 className="text-xl font-semibold text-gray-800">Skills Needed</h2>
@@ -234,7 +307,7 @@ if (loading) {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
                       className="flex items-center gap-3 p-3 rounded-lg" 
-                      style={{background: 'linear-gradient(135deg, #F9F8FC 0%, #F5F3FB 100%)', border: '1px solid rgba(107, 91, 149, 0.2)'}}
+                      style={{background: 'linear-gradient(135deg, #F8F6F4 0%, #F6F2ED 100%)', border: '1px solid rgba(172, 137, 104, 0.2)'}}
                     >
                       <input
                         type="text"
@@ -246,14 +319,17 @@ if (loading) {
                         }}
                         placeholder="Enter skill you want to learn"
                         className="flex-1 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 bg-white text-gray-900" 
-                        style={{border: '1px solid rgba(107, 91, 149, 0.3)', '--tw-ring-color': '#6B5B95'}}
+                        style={{border: '1px solid rgba(172, 137, 104, 0.3)', '--tw-ring-color': '#AC8968'}}
                       />
                       <button
                         onClick={() => {
                           const newSkills = skillsNeeded.filter((_, i) => i !== index);
                           setSkillsNeeded(newSkills);
                         }}
-                        className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        className="px-3 py-2 text-white rounded-lg transition-colors"
+                        style={{backgroundColor: 'rgba(239, 68, 68, 0.6)'}}
+                        onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(239, 68, 68, 0.8)'}
+                        onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(239, 68, 68, 0.6)'}
                       >
                         ×
                       </button>
@@ -262,8 +338,8 @@ if (loading) {
                   <button
                     onClick={() => setSkillsNeeded([...skillsNeeded, ''])}
                     className="w-full py-3 border-2 border-dashed rounded-lg transition-colors font-medium" 
-                    style={{borderColor: 'rgba(107, 91, 149, 0.4)', color: '#6B5B95'}} 
-                    onMouseEnter={(e) => e.target.style.background = 'rgba(107, 91, 149, 0.1)'} 
+                    style={{borderColor: 'rgba(172, 137, 104, 0.4)', color: '#AC8968'}} 
+                    onMouseEnter={(e) => e.target.style.background = 'rgba(172, 137, 104, 0.1)'} 
                     onMouseLeave={(e) => e.target.style.background = 'transparent'}
                   >
                     + Add Skill You Want to Learn

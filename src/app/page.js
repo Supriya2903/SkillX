@@ -255,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-900 dark:bg-black">
+      <footer className="py-12 px-4 sm:px-6 lg:px-8" style={{background: 'linear-gradient(135deg, #3E362E 0%, #5A4E44 100%)'}}>
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
@@ -270,15 +270,15 @@ export default function Home() {
               
               <span className="text-xl font-bold" style={{background: 'linear-gradient(135deg, #865D36 0%, #B8956A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>SkillX</span>
             </div>
-            <div className="flex space-x-8 text-gray-400">
-              <Link href="#" className="transition-colors" style={{'&:hover': {color: '#B8956A'}}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>About</Link>
-              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Contact</Link>
-              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Terms</Link>
-              <Link href="#" className="transition-colors" onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#9CA3AF'}>Privacy</Link>
+            <div className="flex space-x-8">
+              <Link href="#" className="transition-colors" style={{color: 'rgba(255, 255, 255, 0.7)'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>About</Link>
+              <Link href="#" className="transition-colors" style={{color: 'rgba(255, 255, 255, 0.7)'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Contact</Link>
+              <Link href="#" className="transition-colors" style={{color: 'rgba(255, 255, 255, 0.7)'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Terms</Link>
+              <Link href="#" className="transition-colors" style={{color: 'rgba(255, 255, 255, 0.7)'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Privacy</Link>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-            <p className="text-gray-400">&copy; 2025 SkillX. All rights reserved.</p>
+          <div className="mt-8 pt-8 text-center" style={{borderTop: '1px solid rgba(184, 149, 106, 0.3)'}}>
+            <p style={{color: 'rgba(255, 255, 255, 0.7)'}}>&copy; 2025 SkillX. All rights reserved.</p>
           </div>
         </div>
       </footer>
