@@ -271,12 +271,12 @@ export default function ProfileEnhanced() {
                     onChange={(e) => setEditForm({...editForm, bio: e.target.value})}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none resize-none"
                     rows="3"
-                    placeholder="Tell others about yourself, your interests, and what you're passionate about..."
+                    placeholder="Tell others about yourself, your interests, and what you&apos;re passionate about..."
                     maxLength="500"
                   />
                 ) : (
                   <p className="text-gray-700 leading-relaxed">
-                    {user.bio || "This user hasn't added a bio yet."}
+                    {user.bio || "This user hasn&apos;t added a bio yet."}
                   </p>
                 )}
               </div>

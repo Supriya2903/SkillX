@@ -69,7 +69,7 @@ export default function DebugCookies() {
         <div>
           <h3 className="font-semibold">Instructions:</h3>
           <ol className="list-decimal list-inside text-sm space-y-1">
-            <li>First, make sure you're logged in</li>
+            <li>First, make sure you&apos;re logged in</li>
             <li>Check if the token cookie appears above</li>
             <li>Click "Test API Call" to see if the API works</li>
             <li>Check the console for detailed logs</li>

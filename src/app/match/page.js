@@ -108,7 +108,7 @@ export default function Match() {
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">No matches found</h3>
                 <p className="text-gray-600 mb-4">
-                  We couldn't find any users with skills that match your interests.
+                  We couldn&apos;t find any users with skills that match your interests.
                 </p>
                 <p className="text-sm text-gray-500 mb-6">
                   Try updating your skills offered and needed to find more matches!
