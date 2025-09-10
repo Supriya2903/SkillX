@@ -7,9 +7,5 @@
     "src/app/api/**/*.js": {
       "maxDuration": 15
     }
-  },
-  "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "JWT_SECRET": "@jwt_secret"
   }
 }
