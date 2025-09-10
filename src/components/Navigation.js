@@ -18,6 +18,7 @@ export default function Navigation() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadMessageCount, setUnreadMessageCount] = useState(0);
   const [user, setUser] = useState(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -30,9 +31,13 @@ export default function Navigation() {
     if (token) {
       fetchUser();
       fetchNotifications();
+      fetchUnreadMessageCount();
       
       // Poll for new notifications every 30 seconds
-      const interval = setInterval(fetchNotifications, 30000);
+      const interval = setInterval(() => {
+        fetchNotifications();
+        fetchUnreadMessageCount();
+      }, 30000);
       return () => clearInterval(interval);
     }
   }, []);
@@ -63,6 +68,21 @@ export default function Navigation() {
       }
     } catch (error) {
       console.error('Error fetching notifications:', error);
+    }
+  };
+
+  const fetchUnreadMessageCount = async () => {
+    try {
+      const res = await fetch('/api/messages', {
+        credentials: 'include'
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const totalUnread = (data.conversations || []).reduce((sum, conv) => sum + (conv.unreadCount || 0), 0);
+        setUnreadMessageCount(totalUnread);
+      }
+    } catch (error) {
+      console.error('Error fetching unread message count:', error);
     }
   };
 
@@ -196,6 +216,11 @@ export default function Navigation() {
                 {/* Messages */}
                 <Link href="/messages" className="p-2 text-gray-400 hover:text-gray-600 transition-colors relative hidden sm:block">
                   <MessageCircle className="h-5 w-5" />
+                  {unreadMessageCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                      {unreadMessageCount > 9 ? '9+' : unreadMessageCount}
+                    </span>
+                  )}
                 </Link>
 
                 {/* Notifications */}

@@ -203,11 +203,22 @@ export default function Match() {
                         </div>
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-gray-200">
-                        <button onClick={() => router.push(`/messages?user=${user._id}`)} className="w-full text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-105 group-hover:scale-105 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #865D36 0%, #9378B5 100%)'}}>
-                          <MessageCircle className="mr-2 h-4 w-4" />
-                          Connect
-                        </button>
+                      <div className="mt-6 pt-4 border-t border-gray-100">
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={() => router.push(`/messages?user=${user._id}`)}
+                            className="flex-1 text-white py-2.5 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-200 flex items-center justify-center bg-blue-500 hover:bg-blue-600"
+                          >
+                            <MessageCircle className="mr-2 h-4 w-4" />
+                            Message
+                          </button>
+                          <button 
+                            onClick={() => router.push(`/users/${user._id}`)}
+                            className="px-4 py-2.5 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
+                          >
+                            View Profile
+                          </button>
+                        </div>
                       </div>
                     </motion.div>
                   ))}
