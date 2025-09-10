@@ -13,16 +13,6 @@ export default function Match() {
   const [userSkills, setUserSkills] = useState({ offered: [], needed: [] });
   const router = useRouter();
 
-  useEffect(() => {
-    const token = getCookie('token');
-    if (!token) {
-      router.push('/login');
-      return;
-    }
-    
-    fetchMatches();
-  }, [router]);
-
   const fetchMatches = async () => {
     try {
       const res = await fetch('/api/match', {
@@ -48,6 +38,16 @@ export default function Match() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = getCookie('token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+    
+    fetchMatches();
+  }, [fetchMatches, router]);
 
   const handleUpdateSkills = () => {
     router.push('/profile'); // Redirect to profile page to update skills

@@ -166,7 +166,7 @@ export default function Login(){
 
           <div className="mt-6 text-center">
             <p className="text-sm" style={{color: '#5A4E44'}}>
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/signup" className="font-medium transition-colors" style={{color: '#865D36'}} onMouseEnter={(e) => e.target.style.color = '#B8956A'} onMouseLeave={(e) => e.target.style.color = '#865D36'}>
                 Sign up here
               </Link>
