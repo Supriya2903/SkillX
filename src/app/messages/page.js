@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getCookie, deleteCookie } from '@/utils/cookies';
 import Navigation from '@/components/Navigation';
@@ -10,7 +10,7 @@ import {
   X, Plus, Trash2, Edit3
 } from 'lucide-react';
 
-export default function Messages() {
+function MessagesContent() {
   const [user, setUser] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
@@ -613,5 +613,24 @@ export default function Messages() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Messages() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center"
+        >
+          <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading messages...</p>
+        </motion.div>
+      </div>
+    }>
+      <MessagesContent />
+    </Suspense>
   );
 }
