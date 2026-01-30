@@ -71,7 +71,7 @@ export default function DebugCookies() {
           <ol className="list-decimal list-inside text-sm space-y-1">
             <li>First, make sure you&apos;re logged in</li>
             <li>Check if the token cookie appears above</li>
-            <li>Click "Test API Call" to see if the API works</li>
+            <li>Click &quot;Test API Call&quot; to see if the API works</li>
             <li>Check the console for detailed logs</li>
           </ol>
         </div>
